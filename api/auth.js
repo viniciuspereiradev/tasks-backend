@@ -13,10 +13,10 @@ module.exports = app => {
             .whereRaw("LOWER(email) = LOWER(?)", req.body.email)
             .first()
 
-        if (user) {
+        if (user) { 
             bcrypt.compare(req.body.password, user.password, (err, isMatch) => {
                 if (err || !isMatch) {
-                    return res.status(401).send("Não autorizado")
+                    return res.status(401).send("A senha informada é inválida!")
                 }
 
                 const payload = { id: user.id }
